@@ -208,7 +208,7 @@ def find_repository(spec, args):
     return repo
 
 
-def fetch_tarballs(url, name, args):
+def fetch_tarballs(url, name, version, args):
     """Try to find versions of the supplied archive by scraping the web.
 
     Prompts the user to select how many to download if many are found.
@@ -256,7 +256,7 @@ def create(parser, args):
     tty.msg("Creating template for package %s" % name)
 
     # Fetch tarballs (prompting user if necessary)
-    versions, urls = fetch_tarballs(url, name, args)
+    versions, urls = fetch_tarballs(url, name, version, args)
 
     # Try to guess what configure system is used.
     guesser = ConfigureGuesser()
