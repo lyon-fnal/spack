@@ -72,6 +72,7 @@ def location(parser, args):
         print spack.prefix
 
     elif args.packages:
+        # This doesn't really make sense as there can be >1 repo
         print spack.repo.root
 
     elif args.stages:
@@ -94,7 +95,7 @@ def location(parser, args):
 
             if args.package_dir:
                 # This one just needs the spec name.
-                print join_path(spack.repo.root, spec.name)
+                print spack.repo.dirname_for_package_name(spec)
 
             else:
                 # These versions need concretized specs.
@@ -109,4 +110,3 @@ def location(parser, args):
                         tty.die("Build directory does not exist yet. Run this to create it:",
                                 "spack stage " + " ".join(args.spec))
                     print pkg.stage.source_path
-
