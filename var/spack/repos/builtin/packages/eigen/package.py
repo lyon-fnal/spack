@@ -42,6 +42,7 @@ class Eigen(Package):
     variant('scotch', default=True, description='Enables scotch backend')
     variant('fftw', default=True, description='Enables FFTW backend')
     variant('suitesparse', default=True, description='Enables SuiteSparse support')
+    variant('cxx14', default=False, description='Build with C++14 support')
 
     # TODO : dependency on googlehash, superlu, adolc missing
 
@@ -51,6 +52,7 @@ class Eigen(Package):
     depends_on('SuiteSparse', when='+suitesparse')
     depends_on('mpfr@2.3.0:')  # Eigen 3.2.7 requires at least 2.3.0
     depends_on('gmp')
+    depends_on('cmake @2.8.12:')
 
     def install(self, spec, prefix):
 
@@ -59,6 +61,10 @@ class Eigen(Package):
 
         build_directory = join_path(self.stage.path, 'spack-build')
         source_directory = self.stage.source_path
+
+        if '+cxx14' in spec:
+            env['CXXFLAGS'] = self.compiler.cxx14_flag
+            options.append('-DCMAKE_CXX_FLAGS=' + self.compiler.cxx14_flag)
 
         if '+debug' in spec:
             options.append('-DCMAKE_BUILD_TYPE:STRING=Debug')
