@@ -1,0 +1,12 @@
+--- xrootd-4.2.3/cmake/XRootDFindLibs.cmake~	2015-09-02 04:48:29.000000000 -0500
++++ xrootd-4.2.3/cmake/XRootDFindLibs.cmake	2015-11-10 11:28:09.980811735 -0600
+@@ -89,8 +89,8 @@
+ endif()
+
+ if( ENABLE_PYTHON AND (Linux OR APPLE) )
+-  find_package( PythonLibs ${XRD_PYTHON_REQ_VERSION} )
+   find_package( PythonInterp ${XRD_PYTHON_REQ_VERSION} )
++  find_package( PythonLibs ${XRD_PYTHON_REQ_VERSION} )
+   if( PYTHONINTERP_FOUND AND PYTHONLIBS_FOUND )
+     set( BUILD_PYTHON TRUE )
+     set( PYTHON_FOUND TRUE )
